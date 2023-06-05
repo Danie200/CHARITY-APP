@@ -21,6 +21,7 @@ import {SafeArea} from "../components/safeArea"
 
 
 
+
 const Tab = createBottomTabNavigator();
 
 function Home ({navigation}) {
@@ -55,7 +56,9 @@ function Home ({navigation}) {
     <SafeArea>
       <View style={styles.header} >
        <Text style={styles.brandName}>charityapp</Text>
+       <TouchableOpacity onPress={()=> navigation.navigate('Profile')}>
         <FontAwesomeIcon icon={faUser} color="#5C469C" size={32}/>
+        </TouchableOpacity>
       </View>
       <View style={styles.body}>
         <View style={styles.actionBlock}> 
