@@ -3,25 +3,17 @@ import {SafeArea} from "../components/safeArea"
 import * as SplashScreen from 'expo-splash-screen';
 import * as Font from 'expo-font';
 import { Pacifico_400Regular } from "@expo-google-fonts/pacifico";
-import { useState,useEffect,useCallback,useContext } from "react";
-import { AppContext } from "../settings/globalVariables";
+import { useState,useEffect,useCallback } from "react";
 import { TextInput,Button } from 'react-native-paper';
 import * as yup from 'yup';
 import { Formik } from "formik";
 import { auth} from "../settings/firebase.setting";
-import {signInWithEmailAndPassword,onAuthStateChanged}  from "firebase/auth"
-import { MyHome } from "./Home";
-
 
 const validationRules = yup.object({
   email:yup.string().required('you must fill this form').min(5).max(36),
-  password:yup.string().required('Input your Password').min(4)
-
-
 });
 
-export function Login ({navigation}) {
-    const {setUid} = useContext(AppContext)
+export function ForgotPassword ({navigation}) {
     const [appIsReady, setAppIsReady] = useState(false);
     
     useEffect(() => {
@@ -55,35 +47,12 @@ export function Login ({navigation}) {
         <SafeArea>
             <View style={style.heding}>
                 <Text style={style.title}>Charity App</Text>
-                <Text style={style.title2}>Login to your Charity App account</Text>
+                <Text style={style.title2}>Rest your Password</Text>
 
                 <Formik
-                initialValues={{ email: '',password:'' }}
+                initialValues={{ email: ''}}
     onSubmit={(values,action) =>{
-
-      signInWithEmailAndPassword(auth,values.email,values.password)
-        .then(() => onAuthStateChanged(auth,(user) => {setUid(user.uid)
-        navigation.navigate('My Home')}))
-          .catch(error => {
-            if (error.code == 'auth/invalid-email') {
-              Alert.alert(
-                  'message',
-                  'Invalid email/password',
-                  [{text:'Try Again'}]
-              )
-          } else if (error.code == 'auth/wrong-password' || error.code == 'auth/user-not-found'){
-          Alert.alert(
-              'message',
-              'invalid email/password',
-              [{text:'Try Again'}])
-          }else {
-              Alert.alert(
-                  'message',
-                  'Something Went Wrong',
-                  [{text:'Dismiss'}])
-          }
-          })    
-      
+        //code for forgot pssword here
     }}
     validationSchema={validationRules}
   >
@@ -104,30 +73,12 @@ export function Login ({navigation}) {
             :null}
         </View>
 
-
-        
-        <View>
-            <TextInput
-            label='password'
-            mode="outlined"
-            style={style.input}
-            onChangeText={handleChange('password')}
-            onBlur={handleBlur('password')}
-            value={values.password}
-            secureTextEntry={true}
-            />
-            {touched.password && errors.password ?
-            <Text style={{color:'red'}}>
-              {errors.password}</Text>:null}
-        </View>
         
         <View style={style.button}>
-          <Button
-          textColor="black" 
+          <Button 
           mode="contained"
-          onPress={handleSubmit}
-          buttonColor="hotpink">
-            Login
+          onPress={handleSubmit}>
+            Reset Password
           </Button>
         </View>
       </View>
@@ -135,9 +86,9 @@ export function Login ({navigation}) {
           </Formik>
                   
                   <View style={style.account}>
-                    <Text >Don't have an account? </Text>
+                    <Text >Remembered your password </Text>
                     <TouchableOpacity onPress={() => navigation.navigate('Signup')}>
-                      <Text style={style.sign}>Sign up</Text>
+                      <Text style={style.sign}>Go to signin</Text>
                     </TouchableOpacity>
                   </View>
               </View>
