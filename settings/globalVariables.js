@@ -3,11 +3,11 @@ import { createContext,useState } from "react";
 const AppContext = createContext()
 
 function AppProvider({children}) {
-    const [userNames,setUserNames] = useState({fNmae:null,lName:null});
-    const [uid,setUid] = useState(undefined);
+    const [userNames,setuserNames] = useState({fName:null,lName:null});
+    const [uid,setUid] = useState('sdfghjk');
 
     return(
-        <AppContext.Provider value={{userNames,setUserNames,uid,setUid}}>
+        <AppContext.Provider value={{userNames,setuserNames,uid,setUid}}>
             {children}
         </AppContext.Provider>
     )

@@ -11,7 +11,7 @@ export function Profile ({navigation}) {
     return (
         <SafeArea>
            <Button
-           buttonColor="red" onPress={()=> navigation.navigate('CreateProfile')}>Create Profile</Button>
+           buttonColor="gray" onPress={()=> navigation.navigate('CreateProfile')}>Create Profile</Button>
         </SafeArea>
     )
 }

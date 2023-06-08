@@ -1,4 +1,4 @@
-import { View,TouchableOpacity,Text,StyleSheet,Alert} from "react-native";
+import { View,TouchableOpacity,Text,StyleSheet,Alert,ActivityIndicator} from "react-native";
 import {SafeArea} from "../components/safeArea"
 import * as SplashScreen from 'expo-splash-screen';
 import * as Font from 'expo-font';
@@ -23,7 +23,7 @@ const validationRules = yup.object({
 export function Login ({navigation}) {
     const {setUid} = useContext(AppContext)
     const [appIsReady, setAppIsReady] = useState(false);
-    
+    const [eventActivityIndicator,seteventActivityIndicator]= useState(false);
     useEffect(() => {
 
         async function prepare() {
@@ -54,29 +54,34 @@ export function Login ({navigation}) {
     return(
         <SafeArea>
             <View style={style.heding}>
+            { eventActivityIndicator ? <ActivityIndicator size='large' color='green'/> :null}
                 <Text style={style.title}>Charity App</Text>
                 <Text style={style.title2}>Login to your Charity App account</Text>
 
                 <Formik
                 initialValues={{ email: '',password:'' }}
+             
     onSubmit={(values,action) =>{
-
+      seteventActivityIndicator(true);
       signInWithEmailAndPassword(auth,values.email,values.password)
         .then(() => onAuthStateChanged(auth,(user) => {setUid(user.uid)
         navigation.navigate('My Home')}))
           .catch(error => {
             if (error.code == 'auth/invalid-email') {
+              seteventActivityIndicator(false);
               Alert.alert(
                   'message',
                   'Invalid email/password',
                   [{text:'Try Again'}]
               )
           } else if (error.code == 'auth/wrong-password' || error.code == 'auth/user-not-found'){
+            seteventActivityIndicator(false);
           Alert.alert(
               'message',
               'invalid email/password',
               [{text:'Try Again'}])
           }else {
+            seteventActivityIndicator(false);
               Alert.alert(
                   'message',
                   'Something Went Wrong',
@@ -151,7 +156,7 @@ const style = StyleSheet.create({
         flex:1,
         alignItems:'center',
         justifyContent:'center',
-        marginBottom:280
+        marginBottom:90
         },
     title:{
         fontSize:35,

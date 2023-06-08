@@ -1,7 +1,7 @@
 import { useState,useEffect,useCallback,useContext } from "react";
 import { AppContext } from "../settings/globalVariables";
 import { Formik } from "formik";
-import { View,Text,TouchableOpacity,StyleSheet,Alert} from "react-native"
+import { View,Text,TouchableOpacity,StyleSheet,Alert,ActivityIndicator} from "react-native"
 import { TextInput } from 'react-native-paper';
 import * as SplashScreen from 'expo-splash-screen'
 import * as Font from 'expo-font'
@@ -20,6 +20,7 @@ const  validationRules = yup.object({
 export function Signup ({navigation}){
     const {setUid} = useContext(AppContext)
     const [appIsReady, setAppIsReady] = useState(false);
+    const [eventActivityIndicator,seteventActivityIndicator]= useState(false);
    
     useEffect(() => {
         async function prepare() {
@@ -58,6 +59,7 @@ export function Signup ({navigation}){
     return(
         <SafeArea>
             <View style={styles.heading}>
+            { eventActivityIndicator ? <ActivityIndicator size='large' color='green'/> :null}
                 <Text style={styles.title}>Charity App</Text>
                 <Text style={styles.title2}>Create a donator account</Text>
            
@@ -65,9 +67,11 @@ export function Signup ({navigation}){
             <Formik
                 initialValues={{ email: '',password:'',passwordConfirmation:'' }}
                 onSubmit={(values,action) =>{
+                    seteventActivityIndicator(true);
                   createUserWithEmailAndPassword(auth,values.email,values.password)
                   .then(() => onAuthStateChanged(auth,(user) => {
                     setUid(user.uid);//update to the user's uid
+                    seteventActivityIndicator(false);
                     Alert.alert(
                         'message',
                         'your account was created',
@@ -77,18 +81,21 @@ export function Signup ({navigation}){
                   .catch((error) =>{
                     //custom actions for different errors
                     if (error.code == 'auth/invalid-email') {
+                        seteventActivityIndicator(false);
                         Alert.alert(
                             'message',
                             'invalid email',
                             [{text:'Try Again'}]
                         )
                     } else if (error.code == 'auth/email-already-in-use'){
+                        seteventActivityIndicator(false);
                     Alert.alert(
                         'message',
                         'your account was created',
                         [{text:'go to Home',onPress:() => navigation.navigate('My home')},
                         {text:'ForgotPassword',onPress:() => navigation.navigate('ResetPassword')}])
                     }else {
+                        seteventActivityIndicator(false);
                         Alert.alert(
                             'message',
                             'Something Went Wrong',
@@ -156,14 +163,14 @@ const styles = StyleSheet.create ({
         flex:1,
         alignItems:'center',
         justifyContent:'center',
-        marginBottom:280
+        marginBottom:5
     },
     title:{
         fontSize:35,
         fontFamily:'Pacifico_400Regular'
     },
     title2:{
-        marginTop:15
+        marginTop:10
     },
     input:{
         marginTop:15,
