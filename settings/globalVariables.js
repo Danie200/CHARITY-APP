@@ -4,7 +4,7 @@ const AppContext = createContext()
 
 function AppProvider({children}) {
     const [userNames,setuserNames] = useState({fName:null,lName:null});
-    const [uid,setUid] = useState('sdfghjk');
+    const [uid,setUid] = useState(undefined);
 
     return(
         <AppContext.Provider value={{userNames,setuserNames,uid,setUid}}>
