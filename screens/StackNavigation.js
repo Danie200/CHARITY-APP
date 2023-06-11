@@ -24,7 +24,7 @@ export function StackNavigation () {
             <Stack.Screen name='Signup' component={Signup} options={{headerShown:false}} />
             <Stack.Screen name='ResetPassword' component={ForgotPassword} options={{headerShown:true}} />
             <Stack.Screen name='CreateProfile' component={CreateProfile} options={{headerShown:true}} />
-            <Stack.Screen name='Profile' component={Profile} options={{headerShown:true}} />
+            <Stack.Screen name='Profile' component={Profile} options={{headerShown:false}} />
         </Stack.Navigator>
     )
 }
