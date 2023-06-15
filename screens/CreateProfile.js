@@ -65,8 +65,9 @@ export function CreateProfile ({navigation}) {
       validationSchema={validationRules}
     >
       {({ handleChange, handleBlur, handleSubmit, values,errors,touched }) => (
+         <View style={styles.form}>
         <View>
-          <View style={styles.form}>
+         
               <TextInput
               outlineColor="gray"
               activeOutlineColor="#5D9C59"

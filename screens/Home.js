@@ -68,7 +68,7 @@ function Home ({navigation}) {
             <Text style={styles.optionText}>Donate</Text>
           </TouchableOpacity>
 
-          <TouchableOpacity style={styles.actionBox}>
+          <TouchableOpacity style={styles.actionBox} onPress={()=>navigation.navigate('Fund Raisers')}>
             <FontAwesomeIcon icon={faUsersViewfinder} color={Theme.colors.purple100}
             size={Theme.sizes[5]}/>
             <Text style={styles.optionText}>Raisers</Text>

@@ -10,10 +10,9 @@ import { Avatar, Button, Card, Text } from 'react-native-paper';
 
 
 
-const LeftContent = props => <Avatar.Icon{...props} icon="folder"/>
-export function FundRaiser  ()  {
+const LeftContent = props => <Avatar.Icon{...props} icon="heart"/>
+export const FundRaiser  = () => (
         <SafeArea>
-            
             <ScrollView>
             <Card>
                 <Card.Cover source={{uri:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ02EDgUiL7gKjSGbpkRaK4bwKmOF1fPzhfww&usqp=CAU'}}/>      
@@ -23,7 +22,7 @@ export function FundRaiser  ()  {
                 <Text variant="bodyMedium">support the sick </Text>
                 </Card.Content>
                 <View>
-                    <Text style={styles.first}>__________________________________________________</Text>
+                    <Text style={styles.first}>__________________________________________</Text>
                     <Text style={styles.second}> $50 raised - Donation</Text>
                 </View>
                 <Card.Actions>
@@ -33,7 +32,7 @@ export function FundRaiser  ()  {
             </Card>
             </ScrollView>
         </SafeArea>    
-}
+)
 
 const styles=StyleSheet.create({
     first:{

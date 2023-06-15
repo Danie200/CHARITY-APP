@@ -9,7 +9,7 @@ import {Create} from "./Create"
 import { ForgotPassword } from "./ForgotPassword";
 import { CreateProfile } from "./CreateProfile";
 import { Profile } from "./Profile";
-
+import { UpdateProfile } from "./UpdateProfile";
 const Stack = createNativeStackNavigator();
 
 export function StackNavigation () {
@@ -25,6 +25,7 @@ export function StackNavigation () {
             <Stack.Screen name='ResetPassword' component={ForgotPassword} options={{headerShown:true}} />
             <Stack.Screen name='CreateProfile' component={CreateProfile} options={{headerShown:true}} />
             <Stack.Screen name='Profile' component={Profile} options={{headerShown:false}} />
+            <Stack.Screen name='UpdateProfile' component={UpdateProfile} options={{headerShown:false}} />
         </Stack.Navigator>
     )
 }

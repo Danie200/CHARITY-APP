@@ -10,7 +10,7 @@ import * as yup from 'yup';
 import { Formik } from "formik";
 import { auth} from "../settings/firebase.setting";
 import {signInWithEmailAndPassword,onAuthStateChanged}  from "firebase/auth"
-import { MyHome } from "./Home";
+
 
 
 const validationRules = yup.object({
