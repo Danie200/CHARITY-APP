@@ -8,6 +8,7 @@ import { TextInput,Button } from 'react-native-paper';
 import * as yup from 'yup';
 import { Formik } from "formik";
 import { auth} from "../settings/firebase.setting";
+import { getAuth,sendPasswordResetEmail } from "firebase/auth";
 
 const validationRules = yup.object({
   email:yup.string().required('you must fill this form').min(5).max(36),
@@ -15,6 +16,7 @@ const validationRules = yup.object({
 
 export function ForgotPassword ({navigation}) {
     const [appIsReady, setAppIsReady] = useState(false);
+   
     
     useEffect(() => {
 
@@ -47,13 +49,17 @@ export function ForgotPassword ({navigation}) {
         <SafeArea>
             <View style={style.heding}>
                 <Text style={style.title}>Charity App</Text>
-                <Text style={style.title2}>Rest your Password</Text>
+                <Text style={style.title2}>Reset your Password</Text>
 
                 <Formik
-                initialValues={{ email: ''}}
+                initialValues={{ email:''}}
     onSubmit={(values,action) =>{
-        //code for forgot pssword here
-    }}
+      sendPasswordResetEmail(auth,values.email)
+      .then(() => {Alert.alert( 'message',
+      'your Reset Link Was Sent',
+      [{text:'go to Login',onPress:() => navigation.navigate('Login')}])})
+      .catch((error) => {Alert.alert(error)})}}
+
     validationSchema={validationRules}
   >
     {({ handleChange, handleBlur, handleSubmit, values,errors,touched }) => (
@@ -78,7 +84,7 @@ export function ForgotPassword ({navigation}) {
           <Button 
           mode="contained"
           onPress={handleSubmit}>
-            Reset Password
+            Submit
           </Button>
         </View>
       </View>
@@ -87,7 +93,7 @@ export function ForgotPassword ({navigation}) {
                   
                   <View style={style.account}>
                     <Text >Remembered your password </Text>
-                    <TouchableOpacity onPress={() => navigation.navigate('Signup')}>
+                    <TouchableOpacity onPress={() => navigation.navigate('Login')}>
                       <Text style={style.sign}>Go to signin</Text>
                     </TouchableOpacity>
                   </View>

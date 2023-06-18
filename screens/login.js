@@ -10,7 +10,7 @@ import * as yup from 'yup';
 import { Formik } from "formik";
 import { auth} from "../settings/firebase.setting";
 import {signInWithEmailAndPassword,onAuthStateChanged}  from "firebase/auth"
-
+import { getAuth,sendPasswordResetEmail } from "firebase/auth";
 
 
 const validationRules = yup.object({
@@ -24,7 +24,26 @@ export function Login ({navigation}) {
     const {setUid} = useContext(AppContext)
     const [appIsReady, setAppIsReady] = useState(false);
     const [eventActivityIndicator,seteventActivityIndicator]= useState(false);
-    useEffect(() => {
+    const resetPassword =(email) =>{
+      if (email!=null) 
+      {
+        sendPasswordResetEmail(auth,email)
+        .then(() => {
+       alert(" Password reset email sent ")
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+        alert(errorMessage)
+        });
+
+      }
+      else { 
+        alert ('pls enter  valid email')
+      }
+    }
+                  
+  useEffect(() => {
 
         async function prepare() {
           try {
@@ -88,6 +107,7 @@ export function Login ({navigation}) {
                   [{text:'Dismiss'}])
           }
           })    
+         
       
     }}
     validationSchema={validationRules}
@@ -125,19 +145,26 @@ export function Login ({navigation}) {
             <Text style={{color:'red'}}>
               {errors.password}</Text>:null}
         </View>
+
         
         <View style={style.button}>
           <Button
-          textColor="black" 
+          textColor="blue" 
           mode="contained"
           onPress={handleSubmit}
-          buttonColor="lightpurple">
+          buttonColor="grey">
             Login
           </Button>
         </View>
+
+        <View >
+        <TouchableOpacity onPress={() => navigation.navigate('ForgotPassword')}>
+          <Text style={{color:'blue'}}>Forgotten Password?</Text>
+          </TouchableOpacity>
+        </View>
       </View>
     )}
-          </Formik>
+       </Formik>
                   
                   <View style={style.account}>
                     <Text >Don't have an account? </Text>
@@ -170,7 +197,7 @@ const style = StyleSheet.create({
         width:300
     },
     button:{
-      marginTop:20,
+      marginTop:15,
       width:300,
       height:70
     },
