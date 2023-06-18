@@ -1,4 +1,4 @@
-import { View,TouchableOpacity,Text,StyleSheet,Alert} from "react-native";
+import { View,TouchableOpacity,Text,StyleSheet,Alert,ActivityIndicator} from "react-native";
 import {SafeArea} from "../components/safeArea"
 import * as SplashScreen from 'expo-splash-screen';
 import * as Font from 'expo-font';
@@ -16,7 +16,7 @@ const validationRules = yup.object({
 
 export function ForgotPassword ({navigation}) {
     const [appIsReady, setAppIsReady] = useState(false);
-   
+    const [eventActivityIndicator,seteventActivityIndicator]= useState(false);
     
     useEffect(() => {
 
@@ -48,17 +48,40 @@ export function ForgotPassword ({navigation}) {
     return(
         <SafeArea>
             <View style={style.heding}>
+            { eventActivityIndicator ? <ActivityIndicator size='large' color='green'/> :null}
                 <Text style={style.title}>Charity App</Text>
                 <Text style={style.title2}>Reset your Password</Text>
 
                 <Formik
                 initialValues={{ email:''}}
     onSubmit={(values,action) =>{
+      seteventActivityIndicator(true);
       sendPasswordResetEmail(auth,values.email)
-      .then(() => {Alert.alert( 'message',
+      .then
+      (() => {Alert.alert( 'message',
       'your Reset Link Was Sent',
       [{text:'go to Login',onPress:() => navigation.navigate('Login')}])})
-      .catch((error) => {Alert.alert(error)})}}
+      .catch(error =>  {if (error.code == 'auth/invalid-email') {
+        seteventActivityIndicator(false);
+        Alert.alert(
+            'message',
+            'Invalid email/password',
+            [{text:'Try Again'}]
+        )
+    } else if (error.code == 'auth/wrong-password' || error.code == 'auth/user-not-found'){
+      seteventActivityIndicator(false);
+    Alert.alert(
+        'message',
+        'invalid email/password',
+        [{text:'Try Again'}])
+    }else {
+      seteventActivityIndicator(false);
+        Alert.alert(
+            'message',
+            'Something Went Wrong',
+            [{text:'Dismiss'}])}
+    })
+  }}
 
     validationSchema={validationRules}
   >
@@ -108,7 +131,7 @@ const style = StyleSheet.create({
         flex:1,
         alignItems:'center',
         justifyContent:'center',
-        marginBottom:280
+        marginBottom:100
         },
     title:{
         fontSize:35,

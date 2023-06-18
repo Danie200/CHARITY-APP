@@ -10,7 +10,7 @@ import * as yup from 'yup';
 import { Formik } from "formik";
 import { auth} from "../settings/firebase.setting";
 import {signInWithEmailAndPassword,onAuthStateChanged}  from "firebase/auth"
-import { getAuth,sendPasswordResetEmail } from "firebase/auth";
+
 
 
 const validationRules = yup.object({
@@ -24,24 +24,7 @@ export function Login ({navigation}) {
     const {setUid} = useContext(AppContext)
     const [appIsReady, setAppIsReady] = useState(false);
     const [eventActivityIndicator,seteventActivityIndicator]= useState(false);
-    const resetPassword =(email) =>{
-      if (email!=null) 
-      {
-        sendPasswordResetEmail(auth,email)
-        .then(() => {
-       alert(" Password reset email sent ")
-        })
-        .catch((error) => {
-          const errorCode = error.code;
-          const errorMessage = error.message;
-        alert(errorMessage)
-        });
-
-      }
-      else { 
-        alert ('pls enter  valid email')
-      }
-    }
+   
                   
   useEffect(() => {
 
