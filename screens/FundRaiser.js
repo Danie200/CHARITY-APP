@@ -4,46 +4,29 @@ import {SafeArea} from '../components/safeArea'
 import { Button, Card, Text } from 'react-native-paper';
 import { Theme } from '../utils/theme';
 import { db } from '../settings/firebase.setting';
-import { getDocs,collection } from "firebase/firestore";
+import { getDoc,collection } from "firebase/firestore";
 
-export function FundRaisers ({navigation}) {
-    const [raisers,setRaisers] = useState([]);
+export function FundRaiser ({navigation,route}) {
+    const [fundRaisers,setFundRaisers] = useState({});
 
-    const handleGetRaisers = async () => {
-        const querySnap = await getDocs(collection(db,'Project'));
-        setRaisers(querySnap.docs.map(doc => {
-            return {
-                id:doc.id,
-                data:{...doc.data()}
-            }
-        }))
-    }
-    handleGetRaisers();
-
+   
     return (
         <SafeArea>
             <View style={styles.container}>
                 {/* Please scroll down to find some notes that I have added */}
-               <FlatList data={raisers} 
-                key={({item}) => item.id}
-                showsVerticalScrollIndicator={false}
-                renderItem={({item}) => {
-                return (
-                    <Card style={styles.card}>
+                <Card style={styles.card}>
                         <Card.Cover source={{ uri: 'https://picsum.photos/700' }} />
                         <Card.Content style={styles.cardContent}>
-                            <Text variant="headlineMedium">{item.data.title}</Text>
+                           {/* <Text variant="headlineMedium">{item.data.title}</Text>
                             <Text variant="titleLarge" style={{color:'green',marginBottom:8}}>Target: ₦{item.data.target}</Text>
-                            <Text variant="bodyMedium">{item.data.description}</Text>
+                        <Text variant="bodyMedium">{item.data.description}</Text>*/} 
                         </Card.Content>
                         <Card.Actions>
-                            <Button style={styles.viewBtn}
-                            onPress={() =>navigation.navigate('Fund Raiser')}>View</Button>
+                            <Button style={styles.viewBtn}>View</Button>
                             <Button style={styles.donateBtn}>Dontate</Button>
                         </Card.Actions>
                     </Card>
-                )
-               }}/>
+               
             </View>
         </SafeArea>
     )

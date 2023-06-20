@@ -4,12 +4,13 @@ import { Login } from "./Login";
 import {About} from "./about"
 import { Signup } from './Signup';
 import { Donate } from "./Donate";
-import { FundRaiser } from "./fundraisers";
+import { FundRaisers } from "./fundraisers";
 import {Create} from "./Create"
 import { ForgotPassword } from "./ForgotPassword";
 import { CreateProfile } from "./CreateProfile";
 import { Profile } from "./Profile";
 import { UpdateProfile } from "./UpdateProfile";
+import { FundRaiser } from "./FundRaiser";
 
 const Stack = createNativeStackNavigator();
 
@@ -20,7 +21,8 @@ export function StackNavigation () {
             <Stack.Screen name='Login' component={Login} options={{headerShown:false}} />
             <Stack.Screen name='About' component={About} />
             <Stack.Screen name='Donate' component={Donate} />
-            <Stack.Screen name="Fund Raisers" component={FundRaiser}/>
+            <Stack.Screen name="Fund Raisers" component={FundRaisers}/>
+            <Stack.Screen name="Fund Raiser" component={FundRaiser} options={{headerShown:true}}/>
             <Stack.Screen name="Create" component={Create}/>
             <Stack.Screen name='Signup' component={Signup} options={{headerShown:false}} />
             <Stack.Screen name='ResetPassword' component={ForgotPassword} options={{headerShown:true}} />
