@@ -38,7 +38,7 @@ export function FundRaisers ({navigation}) {
                         </Card.Content>
                         <Card.Actions>
                             <Button style={styles.viewBtn}
-                            onPress={() =>navigation.navigate('Fund Raiser')}>View</Button>
+                            onPress={() =>navigation.navigate('Fund Raiser',{projectId:item.id})}>View</Button>
                             <Button style={styles.donateBtn}>Dontate</Button>
                         </Card.Actions>
                     </Card>
