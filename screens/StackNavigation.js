@@ -11,7 +11,8 @@ import { CreateProfile } from "./CreateProfile";
 import { Profile } from "./Profile";
 import { UpdateProfile } from "./UpdateProfile";
 import { FundRaiser } from "./FundRaiser";
-
+import { History } from "./History";
+import { Pay } from "./Pay";
 const Stack = createNativeStackNavigator();
 
 export function StackNavigation () {
@@ -30,6 +31,8 @@ export function StackNavigation () {
             <Stack.Screen name='Profile' component={Profile} options={{headerShown:false}} />
             <Stack.Screen name='UpdateProfile' component={UpdateProfile} options={{headerShown:false}} />
             <Stack.Screen name='ForgotPassword' component={ForgotPassword} options={{headerShown:false}} />
+            <Stack.Screen name='History' component={History}/>
+            <Stack.Screen name='Pay' component={Pay} options={{headerShown:false}} />
         </Stack.Navigator>
     )
 }

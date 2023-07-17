@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import { AppContext } from "../settings/globalVariables";
-import { StyleSheet,SafeAreaView,Image,View,Text, ScrollView,ActivityIndicator} from "react-native";
+import { StyleSheet,Image,View,Text, ScrollView,ActivityIndicator} from "react-native";
 import { Theme } from "../utils/theme";
 import { Button ,TextInput} from "react-native-paper";
 import { db } from "../settings/firebase.setting";
@@ -8,7 +8,7 @@ import { getDoc,doc,updateDoc, } from "firebase/firestore";
 import { Formik } from "formik";
 import * as yup from 'yup';
 import { UseActivityIndicator } from "../components/ActivityIndicator";
-import { faL } from "@fortawesome/free-solid-svg-icons";
+
 
 
 const validationRules = yup.object({

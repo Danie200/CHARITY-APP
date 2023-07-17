@@ -1,10 +1,11 @@
 import { useContext, useEffect, useState } from "react";
 import { AppContext } from "../settings/globalVariables";
-import { StyleSheet,SafeAreaView,Image,View,Text, ScrollView} from "react-native";
+import { StyleSheet,Image,View,Text,} from "react-native";
 import { Theme } from "../utils/theme";
 import { Button } from "react-native-paper";
 import { db } from "../settings/firebase.setting";
 import { getDoc,doc } from "firebase/firestore";
+import { ScrollView } from "react-native-gesture-handler";
 
 export function Profile ({navigation}) {
     const { uid } = useContext(AppContext);
@@ -31,7 +32,7 @@ export function Profile ({navigation}) {
          source={{uri:'https://images.pexels.com/photos/91227/pexels-photo-91227.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'}}/>   
         
    <View style={styles.body}>
-   <ScrollView>     
+   <ScrollView>   
                <View style={styles.contentBox}>
                   <View style={{paddingLeft:9}}>
                   <Text style={{fontWeight:'bold'}}>Name :</Text>

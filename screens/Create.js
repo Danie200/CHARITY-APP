@@ -9,7 +9,7 @@ import { UseActivityIndicator } from "../components/ActivityIndicator";
 import { useState } from "react";
 import { addDoc,collection} from "firebase/firestore";
 import { db } from "../settings/firebase.setting";
-import { faL } from "@fortawesome/free-solid-svg-icons";
+
 
 const validationRules = yup.object({
     title:yup.string().required('required field',),

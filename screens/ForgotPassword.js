@@ -8,7 +8,7 @@ import { TextInput,Button } from 'react-native-paper';
 import * as yup from 'yup';
 import { Formik } from "formik";
 import { auth} from "../settings/firebase.setting";
-import { getAuth,sendPasswordResetEmail } from "firebase/auth";
+import { sendPasswordResetEmail } from "firebase/auth";
 
 const validationRules = yup.object({
   email:yup.string().required('you must fill this form').min(5).max(36),

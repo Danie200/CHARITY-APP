@@ -7,9 +7,6 @@ import * as yup from 'yup';
 import { Formik } from "formik";
 import { db } from "../settings/firebase.setting";
 import { setDoc,doc} from "firebase/firestore";
-import { auth } from "../settings/firebase.setting";
-
-
 
 const validationRules = yup.object({
     fName:yup.string().required('required field',),

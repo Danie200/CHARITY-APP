@@ -4,10 +4,10 @@
     "slug": "appcharity",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/myapp_icon.png",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./assets/myapp_splash.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
@@ -15,16 +15,23 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.banxhi.appcharity"
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
+        "foregroundImage": "./assets/myapp_adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.banxhi.appcharity"
     },
     "web": {
-      "favicon": "./assets/favicon.png"
+      "favicon": "./assets/myapp_favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "9674ec23-6195-43a7-bd64-7ea185f338a1"
+      }
     }
   }
 }
