@@ -111,7 +111,7 @@ return(
                   outlineColor={Theme.colors.gray100}
                   activeOutlineColor={Theme.colors.gray200}
                   mode="outlined"
-                  label='email'
+                  label='Email'
                   onChangeText={handleChange('email')}
                   onBlur={handleBlur('email')}
                   value={values.email} 
@@ -127,10 +127,10 @@ return(
                   outlineColor={Theme.colors.gray100}
                   activeOutlineColor={Theme.colors.gray200}
                   mode="outlined"
-                  label='password'
+                  label='Password'
                   onChangeText={handleChange('password')}
                   onBlur={handleBlur('password')}
-                  value={values.email} 
+                  value={values.password} 
                   secureTextEntry={true}
                 />
                 {touched.password && errors.password 
@@ -143,7 +143,7 @@ return(
                 outlineColor={Theme.colors.gray100}
                 activeOutlineColor={Theme.colors.gray200}
                 mode="outlined"
-                label='password'
+                label=' Confirm Password'
                 onChangeText={handleChange('passwordConfirmation')}
                 onBlur={handleBlur('passwordConfirmation')}
                 value={values.passwordConfirmation} 
