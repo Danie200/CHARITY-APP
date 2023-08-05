@@ -1,6 +1,6 @@
 import {createNativeStackNavigator} from "@react-navigation/native-stack"
 import { MyHome } from "./Home";
-import { Login } from "./Login";
+import {Login} from "./Login"
 import {About} from "./about"
 import { Signup } from './Signup';
 import { Donate } from "./Donate";
